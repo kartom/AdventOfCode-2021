@@ -1,6 +1,6 @@
 import aoc_utils.readIntListFile
 
-fun part1() {
+fun day1part1() {
     val nums = readIntListFile("data/Day-01-data.txt")
     var increasing = 0
     var lastNum: Int = nums[0]
@@ -14,7 +14,7 @@ fun part1() {
     println("Part1: Number of increasing numbers: $increasing")
 }
 
-fun part2() {
+fun day1part2() {
     val nums = readIntListFile("data/Day-01-data.txt")
     var increasing = 0
     val avg = mutableListOf<Int>()
@@ -38,6 +38,6 @@ fun part2() {
 }
 
 fun main()  {
-    part1()
-    part2()
+    day1part1()
+    day1part2()
 }
