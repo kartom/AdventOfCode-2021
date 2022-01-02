@@ -1,9 +1,9 @@
-import aoc_utils.readStringListFile
+import java.io.File
 import kotlin.math.pow
 
 
 
-fun day3Part1(data: MutableList<String>) {
+fun day3Part1(data: List<String>) {
     println("----------------------------------\nPart 1:")
     val nX = MutableList<Int>(data[0].length) {0}
     val nHalf:Int = data.size/2
@@ -27,7 +27,7 @@ fun day3Part1(data: MutableList<String>) {
     println("Power consumption: ${gamma*epsilon}")
 }
 
-fun day3Part2(data: MutableList<String>) {
+fun day3Part2(data: List<String>) {
     println("----------------------------------\nPart 2:")
 
     var pos = 0
@@ -66,7 +66,7 @@ fun day3Part2(data: MutableList<String>) {
 }
 
 fun main()  {
-    val data  = readStringListFile("data/Day-03-data.txt")
+    val data  = File("data/Day-03-data.txt").readLines()
     day3Part1(data)
     day3Part2(data)
 }

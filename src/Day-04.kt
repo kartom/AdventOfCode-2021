@@ -1,4 +1,4 @@
-import aoc_utils.readStringListFile
+import java.io.File
 
 fun parseLine(lines: MutableList<String>, delimiter: Char): List<Int> {
     val line = lines.first().replace("  "," ").trim()
@@ -68,7 +68,6 @@ class BingoBoard() {
 }
 
 fun day4Part1(numbers: List<Int>, boards: MutableList<BingoBoard>) {
-    println("=================================\nDay 4 - part 1")
     print("Numbers:")
     for( number in numbers) {
         print(" $number")
@@ -91,7 +90,6 @@ fun day4Part1(numbers: List<Int>, boards: MutableList<BingoBoard>) {
 
 
 fun day4Part2(numbers: List<Int>, boards: MutableList<BingoBoard>) {
-    println("=================================\nDay 4 - part 1")
     print("Numbers:")
     val bingo = MutableList<Boolean>(boards.size) { false }
     for( number in numbers) {
@@ -106,6 +104,7 @@ fun day4Part2(numbers: List<Int>, boards: MutableList<BingoBoard>) {
         if( boards.size-bingo.count { it } == 1 ) {
             //The board without bingo is the last board to get bingo, find it!
             println(" Only one board left!")
+            println("Replaying the last board (just to keep it simple)")
             for(i in boards.indices) {
                 if(!bingo[i]) {
                     //This is the board, lets play this one alone
@@ -120,7 +119,7 @@ fun day4Part2(numbers: List<Int>, boards: MutableList<BingoBoard>) {
 
 fun main()  {
     //Preparations
-    val lines = readStringListFile("data/Day-04-data.txt")
+    val lines = File("data/Day-04-data.txt").readLines().toMutableList()
     val numbers = parseLine(lines,',')
     println("Numbers: $numbers")
     val boards = mutableListOf<BingoBoard>()
@@ -134,9 +133,9 @@ fun main()  {
             lines.removeFirst()
         }
     }
-    //Part 1
+    println("=================================\nDay 4 - part 1")
     day4Part1(numbers,boards)
-    //Part 2
+    println("=================================\nDay 4 - part 2")
     boards.map { it.resetBoard() }
     day4Part2(numbers,boards)
 }

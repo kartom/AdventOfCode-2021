@@ -4,7 +4,7 @@ fun day2Part1() {
     val commands = readStringIntFile("data/Day-02-data.txt")
     var distance = 0
     var depth =0
-    for( command in commands ) {
+    commands.forEach { command->
         if( command.first == "forward" ) {
             distance += command.second
         } else if ( command.first == "up") {
@@ -21,7 +21,7 @@ fun day2Part2() {
     var distance = 0
     var aim = 0
     var depth =0
-    for( command in commands ) {
+    commands.forEach { command ->
         if( command.first == "forward" ) {
             distance += command.second
             depth += aim*command.second

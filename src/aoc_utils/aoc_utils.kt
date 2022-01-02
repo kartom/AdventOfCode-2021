@@ -4,18 +4,19 @@ import java.io.File
 
 typealias StringInt = Pair<String, Int>
 
-fun readIntListFile(filename: String): MutableList<Int> {
-    val res = mutableListOf<Int>()
-    File(filename).forEachLine { str -> res.add(str.toInt())}
-    return res
+/**
+ * Reads a fle with an integer on each line
+ *
+ * @return List of all integers
+ */
+fun readIntListFile(filename: String): List<Int> {
+    return File(filename).readLines().map { it.toInt() }
 }
 
-fun readStringListFile(filename: String): MutableList<String> {
-    val res = mutableListOf<String>()
-    File(filename).forEachLine { str -> res.add(str)}
-    return res
-}
-
+/**
+ * Reads a file with a string and an integer separated by a singel space on each line
+ * @return List of pair with the string ant int
+ */
 fun readStringIntFile(filename: String): MutableList<StringInt> {
     val res = mutableListOf<StringInt>()
     File(filename).forEachLine { line ->
@@ -25,3 +26,10 @@ fun readStringIntFile(filename: String): MutableList<StringInt> {
     return res
 }
 
+/**
+ * Reads a file with one comma separated line of integers
+ * @return List of integers
+ */
+fun readCSVintFile(filename: String): List<Int> {
+    return File(filename).readText().split(',').map{ it.toInt() }
+}

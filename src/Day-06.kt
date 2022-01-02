@@ -1,7 +1,7 @@
-import java.io.File
+import aoc_utils.readCSVintFile
 
 fun main()  {
-    val fishes=File("data/Day-06-data.txt").readText().split(',').map{ it.toInt() }
+    val fishes=readCSVintFile("data/Day-06-data.txt")
     val fishState = Array<Long>(9) { 0 }
     for(fish in fishes) {
         fishState[fish]=fishState.getOrElse(fish) { 0 }+1
@@ -18,6 +18,6 @@ fun main()  {
         if( day in listOf(18,80,256))
             println("${day.toString().padStart(3,' ')}: " +
                     "${fishState.sum().toString().padStart(12,' ')} " +
-                    "[${fishState.map{ it.toString().padStart(4,' ')}.joinToString()}]")
+                    "[${fishState.joinToString { it.toString().padStart(4, ' ') }}]")
     }
 }

@@ -1,4 +1,4 @@
-import aoc_utils.readStringListFile
+import java.io.File
 import kotlin.math.sign
 
 class Co(val x: Int, val y: Int) {
@@ -55,10 +55,9 @@ fun day5(lines: MutableList<Line>, diagonals: Boolean = false) {
 }
 
 fun main()  {
-    val txtRows = readStringListFile("data/Day-05-data.txt")
     val lines = mutableListOf<Line>()
-    for(txt in txtRows) {
-        lines.add(Line(txt))
+    File("data/Day-05-data.txt").readLines().forEach {
+        lines.add(Line(it))
     }
     day5(lines)
     day5(lines, true)
