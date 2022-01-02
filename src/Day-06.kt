@@ -16,6 +16,8 @@ fun main()  {
         fishState[6]+=fishState0
         fishState[8]=fishState0
         if( day in listOf(18,80,256))
-            println("${day.toString().padStart(3,' ')}: ${fishState.sum().toString().padStart(12,' ')} [${fishState.map{ it.toString().padStart(4,' ')}.joinToString()}]")
+            println("${day.toString().padStart(3,' ')}: " +
+                    "${fishState.sum().toString().padStart(12,' ')} " +
+                    "[${fishState.map{ it.toString().padStart(4,' ')}.joinToString()}]")
     }
 }
