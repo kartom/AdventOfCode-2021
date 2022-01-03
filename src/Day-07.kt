@@ -5,7 +5,7 @@ import kotlin.math.max
 fun fuelCalc(crabs: List<Int>, fuelFun: (Int)->Int) {
     var maxPos = 0
     crabs.forEach { maxPos=max(it, maxPos) }
-    val fuel = Array<Int>(maxPos+1) { 0 }
+    val fuel = Array(maxPos+1) { 0 }
     for(pos in fuel.indices) {
         crabs.forEach { crab-> fuel[pos] += fuelFun(abs(crab - pos)) }
     }

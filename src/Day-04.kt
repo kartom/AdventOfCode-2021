@@ -8,7 +8,7 @@ fun parseLine(lines: MutableList<String>, delimiter: Char): List<Int> {
 }
 
 
-class BingoBoard() {
+class BingoBoard {
     private val _numbers = mutableListOf<List<Int>>()
     private val _drawn = mutableListOf<MutableList<Boolean>>()
 
@@ -40,8 +40,8 @@ class BingoBoard() {
     }
 
     fun drawNumber(number: Int): Boolean {
-        val colBingo = MutableList<Boolean>(_numbers.first().size) { true }
-        val rowBingo = MutableList<Boolean>(_numbers.size) { true }
+        val colBingo = MutableList(_numbers.first().size) { true }
+        val rowBingo = MutableList(_numbers.size) { true }
         for (r in _numbers.indices) {
             for (c in _numbers[r].indices) {
                 if (_numbers[r][c] == number) _drawn[r][c]=true
@@ -56,7 +56,7 @@ class BingoBoard() {
         return false
     }
 
-    fun sumOfUndrawn(): Int {
+    fun sumOfNotDrawn(): Int {
         var sum =0
         for (r in _numbers.indices) {
             for (c in _numbers[r].indices) {
@@ -78,7 +78,7 @@ fun day4Part1(numbers: List<Int>, boards: MutableList<BingoBoard>) {
             // board.printBoard()
             if( bingo ) {
                 println(" BINGO!")
-                val sum = board.sumOfUndrawn()
+                val sum = board.sumOfNotDrawn()
                 println("Sum of board: $sum")
                 println("Score: $sum*$number = ${sum*number}")
                 return
@@ -91,7 +91,7 @@ fun day4Part1(numbers: List<Int>, boards: MutableList<BingoBoard>) {
 
 fun day4Part2(numbers: List<Int>, boards: MutableList<BingoBoard>) {
     print("Numbers:")
-    val bingo = MutableList<Boolean>(boards.size) { false }
+    val bingo = MutableList(boards.size) { false }
     for( number in numbers) {
         for(i in boards.indices) {
             if( boards[i].drawNumber(number) )

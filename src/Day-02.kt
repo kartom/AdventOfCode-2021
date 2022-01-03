@@ -5,12 +5,16 @@ fun day2Part1() {
     var distance = 0
     var depth =0
     commands.forEach { command->
-        if( command.first == "forward" ) {
-            distance += command.second
-        } else if ( command.first == "up") {
-            depth -= command.second
-        } else if ( command.first == "down") {
-            depth += command.second
+        when (command.first) {
+            "forward" -> {
+                distance += command.second
+            }
+            "up" -> {
+                depth -= command.second
+            }
+            "down" -> {
+                depth += command.second
+            }
         }
     }
     println("Day2 - part 1: ${distance*depth}")
@@ -22,13 +26,17 @@ fun day2Part2() {
     var aim = 0
     var depth =0
     commands.forEach { command ->
-        if( command.first == "forward" ) {
-            distance += command.second
-            depth += aim*command.second
-        } else if ( command.first == "up") {
-            aim -= command.second
-        } else if ( command.first == "down") {
-            aim += command.second
+        when (command.first) {
+            "forward" -> {
+                distance += command.second
+                depth += aim*command.second
+            }
+            "up" -> {
+                aim -= command.second
+            }
+            "down" -> {
+                aim += command.second
+            }
         }
     }
     println("Day2 - part 1: ${distance*depth}")

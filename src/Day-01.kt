@@ -1,11 +1,11 @@
 import aoc_utils.readIntListFile
 
 fun day1part1() {
-    val nums = readIntListFile("data/Day-01-data.txt").toMutableList()
+    val numbers = readIntListFile("data/Day-01-data.txt").toMutableList()
     var increasing = 0
-    var lastNum: Int = nums[0]
-    nums.removeFirst()
-    for( num in nums) {
+    var lastNum: Int = numbers[0]
+    numbers.removeFirst()
+    for( num in numbers) {
         if(num>lastNum) {
             increasing+=1
         }
@@ -15,17 +15,17 @@ fun day1part1() {
 }
 
 fun day1part2() {
-    val nums = readIntListFile("data/Day-01-data.txt").toMutableList()
+    val numbers = readIntListFile("data/Day-01-data.txt").toMutableList()
     var increasing = 0
     val avg = mutableListOf<Int>()
-    avg.add(nums[0])
-    nums.removeFirst()
-    avg.add(nums[0])
-    nums.removeFirst()
-    avg.add(nums[0])
-    nums.removeFirst()
+    avg.add(numbers[0])
+    numbers.removeFirst()
+    avg.add(numbers[0])
+    numbers.removeFirst()
+    avg.add(numbers[0])
+    numbers.removeFirst()
     var lastAvg= avg[0]+avg[1]+avg[2]
-    for( num in nums) {
+    for( num in numbers) {
         avg.removeFirst()
         avg.add(num)
         val newAvg = avg[0]+avg[1]+avg[2]
