@@ -1,42 +1,9 @@
-import java.io.File
-
-fun day1part1(numbers: MutableList<Int>) {
-    var increasing = 0
-    var lastNum: Int = numbers[0]
-    numbers.removeFirst()
-    for( num in numbers) {
-        if(num>lastNum) {
-            increasing+=1
-        }
-        lastNum = num
-    }
-    println("Part1: Number of increasing numbers: $increasing")
-}
-
-fun day1part2(numbers: MutableList<Int>) {
-    var increasing = 0
-    val avg = mutableListOf<Int>()
-    avg.add(numbers[0])
-    numbers.removeFirst()
-    avg.add(numbers[0])
-    numbers.removeFirst()
-    avg.add(numbers[0])
-    numbers.removeFirst()
-    var lastAvg= avg[0]+avg[1]+avg[2]
-    for( num in numbers) {
-        avg.removeFirst()
-        avg.add(num)
-        val newAvg = avg[0]+avg[1]+avg[2]
-        if(newAvg>lastAvg) {
-            increasing+=1
-        }
-        lastAvg = newAvg
-    }
-    println("Part2: Number of increasing numbers: $increasing")
-}
+fun countIncreasing(numbers: List<Int>,avg:Int) =
+    (avg until numbers.size).count { pos ->
+        (pos-avg until pos).sumOf{ numbers[it] } < (pos-avg+1 until pos+1).sumOf{ numbers[it] } }
 
 fun main()  {
-    val numbers = File("data/Day-01-data.txt").readLines().map { it.toInt() }
-    day1part1(numbers.toMutableList())
-    day1part2(numbers.toMutableList())
+    val numbers = java.io.File("data/Day-01-data.txt").readLines().map { it.toInt() }
+    println("Day 1, part 1: Number of increasing values: ${countIncreasing(numbers,1)}")
+    println("Day 1, part 2: Number of increasing values with sliding window: ${countIncreasing(numbers,3)}")
 }
