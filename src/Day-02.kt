@@ -1,41 +1,22 @@
-import java.io.File
+fun calcDistance(commands: List<Pair<String, Int>>) = commands.sumOf { if( it.first == "forward") it.second else 0 }
 
-fun day2Part1(commands: MutableList<Pair<String,Int>>) {
-    var distance = 0
-    var depth =0
-    commands.forEach { command->
-        when (command.first) {
-            "forward" -> distance += command.second
-            "up" -> depth -= command.second
-            "down" -> depth += command.second
-        }
-    }
-    println("Day2 - part 1: ${distance*depth}")
-}
+fun calcDepth1(commands: List<Pair<String,Int>>) =
+    commands.sumOf { (command, value) -> if( command == "up") -value else if (command == "down") value else 0 }
 
-fun day2Part2(commands: MutableList<Pair<String,Int>>) {
-    var distance = 0
-    var aim = 0
-    var depth =0
-    commands.forEach { command ->
-        when (command.first) {
-            "forward" -> {
-                distance += command.second
-                depth += aim*command.second
-            }
-            "up" -> aim -= command.second
-            "down" -> aim += command.second
-        }
+fun calcDepth2(commands: List<Pair<String,Int>>) =
+    commands.indices.sumOf { i ->
+        if( commands[i].first=="forward")
+            commands.take(i).sumOf { (command, value)->
+                if (command=="up") -value else if (command=="down") value else 0 }*commands[i].second
+        else 0
     }
-    println("Day2 - part 1: ${distance*depth}")
-}
 
 fun main()  {
-    val commands = mutableListOf<Pair<String, Int>>()
-    File("data/Day-02-data.txt").forEachLine { line ->
-        val (string, value) = line.split(" ")
-        commands.add(Pair(string, value.toInt()))
+    val commands =
+    java.io.File("data/Day-02-data.txt").readLines().map { line ->
+        line.split(" ").zipWithNext().map { Pair(it.first, it.second.toInt()) }.first()
     }
-    day2Part1(commands)
-    day2Part2(commands)
+
+    println("Day 2, part 1: Depth*position=${calcDepth1(commands)*calcDistance(commands)}")
+    println("Day 2, part 2: Depth*position=${calcDepth2(commands)*calcDistance(commands)}")
 }
