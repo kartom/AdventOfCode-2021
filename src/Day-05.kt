@@ -1,46 +1,32 @@
 import java.io.File
-import kotlin.math.sign
 
 class Co(val x: Int, val y: Int) {
-    override fun toString(): String {
-        return "($x,$y)"
-    }
+    override fun toString(): String = "($x,$y)"
 }
 
 class Line(str: String) {
     private val coList = str.replace(" -> ",",").split(',').map { it.toInt() }
     private val c = listOf(Co(coList[0],coList[1]),Co(coList[2],coList[3]))
 
-    fun isNotDiagonal(): Boolean {
-        return (c[0].x==c[1].x) or (c[0].y==c[1].y)
-    }
+    fun isNotDiagonal(): Boolean = (c[0].x==c[1].x) or (c[0].y==c[1].y)
 
     fun getLineList(): MutableList<Co> {
-        val co = mutableListOf<Co>()
-        val dx = sign((c[1].x-c[0].x).toFloat()).toInt()
-        val dy = sign((c[1].y-c[0].y).toFloat()).toInt()
+        val res = mutableListOf<Co>()
+        val dx = if(c[1].x>c[0].x) 1 else (if(c[0].x>c[1].x) -1 else 0)
+        val dy = if(c[1].y>c[0].y) 1 else (if(c[0].y>c[1].y) -1 else 0)
         var x  = c[0].x
         var y  = c[0].y
-        co.add(Co(x,y))
+        res.add(Co(x,y))
         while( (x!=c[1].x) or (y!=c[1].y)) {
             x+=dx
             y+=dy
-            co.add(Co(x,y))
+            res.add(Co(x,y))
         }
-        return co
+        return res
     }
-
-    override fun toString():String {
-        return "line$c"
-    }
-
 }
 
-fun day5(lines: MutableList<Line>, diagonals: Boolean = false) {
-    if( !diagonals )
-        print("Day5 part 1: ")
-    else
-        print("Day5 part 2: ")
+fun countOverlap(lines: MutableList<Line>, diagonals: Boolean = false):Int {
     val diagram = mutableMapOf<String,Int>()
     for( line in lines) {
         if (diagonals or line.isNotDiagonal())
@@ -49,16 +35,13 @@ fun day5(lines: MutableList<Line>, diagonals: Boolean = false) {
             }
     }
     var count = 0
-    for( point in diagram )
-        if( point.value > 1 ) count+=1
-    println(count)
+    diagram.forEach { (_, value) -> if( value > 1 ) count+=1 }
+    return count
 }
 
 fun main()  {
     val lines = mutableListOf<Line>()
-    File("data/Day-05-data.txt").readLines().forEach {
-        lines.add(Line(it))
-    }
-    day5(lines)
-    day5(lines, true)
+    File("data/Day-05-data.txt").readLines().forEach { lines.add(Line(it))  }
+    println("Day5 part 1: ${countOverlap(lines, false)}")
+    println("Day5 part 2: ${countOverlap(lines, true)}")
 }

@@ -1,7 +1,7 @@
-import aoc_utils.readCSVintFile
+import java.io.File
 
 fun main()  {
-    val fishes=readCSVintFile("data/Day-06-data.txt")
+    val fishes= File("data/Day-06-data.txt").readText().split(',').map{ it.toInt() }
     val fishState = Array<Long>(9) { 0 }
     for(fish in fishes) {
         fishState[fish]=fishState.getOrElse(fish) { 0 }+1

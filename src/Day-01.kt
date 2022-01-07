@@ -1,7 +1,6 @@
-import aoc_utils.readIntListFile
+import java.io.File
 
-fun day1part1() {
-    val numbers = readIntListFile("data/Day-01-data.txt").toMutableList()
+fun day1part1(numbers: MutableList<Int>) {
     var increasing = 0
     var lastNum: Int = numbers[0]
     numbers.removeFirst()
@@ -14,8 +13,7 @@ fun day1part1() {
     println("Part1: Number of increasing numbers: $increasing")
 }
 
-fun day1part2() {
-    val numbers = readIntListFile("data/Day-01-data.txt").toMutableList()
+fun day1part2(numbers: MutableList<Int>) {
     var increasing = 0
     val avg = mutableListOf<Int>()
     avg.add(numbers[0])
@@ -38,6 +36,7 @@ fun day1part2() {
 }
 
 fun main()  {
-    day1part1()
-    day1part2()
+    val numbers = File("data/Day-01-data.txt").readLines().map { it.toInt() }
+    day1part1(numbers.toMutableList())
+    day1part2(numbers.toMutableList())
 }
